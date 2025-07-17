@@ -1,5 +1,5 @@
 import './App.css'
-import { Routes, Route, Link } from "react-router";
+import { Routes, Route, Link } from "react-router-dom";
 import {TasksPage} from "../pages/tasks/TasksPage.tsx";
 import {EditTaskPage} from "../pages/edit-task/ui/EditTaskPage.tsx";
 
@@ -9,7 +9,7 @@ function App() {
     <>
         <header>
             <Link to="/" className="logoWrapper">
-                <img src="/logo.svg" alt="logo" width="40"/>
+                <img src="/logo.svg" alt="logo" width="35"/>
                 <span className="logoTitle">Тасочный менеджеритель</span>
             </Link>
         </header>

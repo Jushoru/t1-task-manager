@@ -14,7 +14,7 @@ header {
 }
 
 .logoTitle {
-  font-size: 19px;
+  font-size: 18px;
   font-weight: bold;
   color: var(--color-bg-primary);
   text-transform: uppercase;
@@ -25,10 +25,12 @@ header {
   display: flex;
   flex-direction: column;
   padding: var(--indent-vertical) var(--indent-horizontal);
+  flex: 1 1 auto;
+  overflow: auto;
 }
 
 
 h3 {
   margin: 0;
-  font-size: 20px;
+  font-size: 18px;
 }

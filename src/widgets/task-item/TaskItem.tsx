@@ -14,8 +14,8 @@ export const TaskItem: React.FC<TaskItemProps> = ({task}) => {
                 {task.description && <p className="taskDescription">{task.description}</p>}
             </div>
             <div className="tagsWrapper">
+                <Chip label={task.priority} color="secondary" size="small" className="chipBold"/>
                 <Chip label={task.category} color="primary" size="small" className="chipBold"/>
-                <Chip label={task.priority} color="success" size="small" className="chipBold"/>
             </div>
         </div>
     )

@@ -1,5 +1,6 @@
 import { TaskList } from '../../widgets/task-list/TaskList';
 import type { TaskUi } from '../../entities/task/TaskTypes';
+import './TasksPage.css'
 
 // Временный массив задач
 const mockTasks: TaskUi[] = [
