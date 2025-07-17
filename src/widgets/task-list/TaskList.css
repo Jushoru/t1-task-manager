@@ -1,0 +1,28 @@
+
+.TaskBoard {
+    display: flex;
+    gap: 1rem;
+    min-height: 100%
+}
+
+.TaskColumn {
+    flex: 1;
+    background-color: var(--color-bg-secondary);
+    border-radius: 8px;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+}
+
+.TaskColumn h3 {
+    min-width: 200px;
+    margin-bottom: 1rem;
+    color: var(--color-bg-primary)
+}
+
+.TaskColumnContent {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}

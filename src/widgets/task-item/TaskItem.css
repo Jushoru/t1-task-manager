@@ -1,0 +1,35 @@
+
+
+.taskItemWrapper {
+    background-color: var(--color-bg-task);
+    position: relative;
+    border-radius: 8px;
+    height: min-content;
+    padding: var(--indent-vertical)
+}
+
+.taskItemWrapper:hover {
+    background-color: var(--color-bg-task-hover);
+    cursor: pointer;
+}
+
+.taskItemWrapper div h3 {
+    color: var(--color-bg-secondary);
+    margin-bottom: 4px;
+}
+
+.taskDescription {
+    margin-top: 0px;
+    margin-bottom: 14px;
+}
+
+.chipBold {
+    font-size: 12px !important;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.tagsWrapper {
+    display: flex;
+    gap: 8px;
+}
