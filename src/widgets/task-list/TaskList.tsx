@@ -1,15 +1,22 @@
-import type { TaskUi } from "../../entities/task/TaskTypes.ts";
+import type {StatusType, TaskUi} from "../../entities/task/TaskTypes.ts";
 import { TaskItem } from "../task-item/TaskItem.tsx";
+import {Button} from "@mui/material";
 import './TaskList.css';
+import AddIcon from '@mui/icons-material/Add';
 
 interface TaskListProps {
     tasks: TaskUi[];
+    openCreateTask: (status: StatusType) => void;
 }
 
-export const TaskList: React.FC<TaskListProps> = ({ tasks }) => {
+export const TaskList: React.FC<TaskListProps> = ({ tasks, openCreateTask}) => {
     const todoTasks = tasks.filter(task => task.status === 'ToDo');
     const inProgressTasks = tasks.filter(task => task.status === 'InProgress');
     const doneTasks = tasks.filter(task => task.status === 'Done');
+
+    const createTask = (status: StatusType) => {
+        openCreateTask(status)
+    }
 
     return (
         <div className="TaskBoard">
@@ -20,6 +27,14 @@ export const TaskList: React.FC<TaskListProps> = ({ tasks }) => {
                         <TaskItem key={index} task={task} />
                     ))}
                 </div>
+                <Button
+                    sx={{backgroundColor: 'var(--color-button)'}}
+                    size="small" variant="contained"
+                    startIcon={<AddIcon/>}
+                    onClick={() => createTask('ToDo')}
+                >
+                    Добавить задачу
+                </Button>
             </div>
 
             <div className="TaskColumn">
@@ -29,6 +44,14 @@ export const TaskList: React.FC<TaskListProps> = ({ tasks }) => {
                         <TaskItem key={index} task={task} />
                     ))}
                 </div>
+                <Button
+                    sx={{backgroundColor: 'var(--color-button)'}}
+                    size="small" variant="contained"
+                    startIcon={<AddIcon/>}
+                    onClick={() => createTask("InProgress")}
+                >
+                    Добавить задачу
+                </Button>
             </div>
 
             <div className="TaskColumn">
@@ -38,6 +61,14 @@ export const TaskList: React.FC<TaskListProps> = ({ tasks }) => {
                         <TaskItem key={index} task={task} />
                     ))}
                 </div>
+                <Button
+                    sx={{backgroundColor: 'var(--color-button)'}}
+                    size="small" variant="contained"
+                    startIcon={<AddIcon/>}
+                    onClick={() => createTask("Done")}
+                >
+                    Добавить задачу
+                </Button>
             </div>
         </div>
     );

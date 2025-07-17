@@ -1,5 +1,6 @@
 header {
   width: 100vw;
+  min-width: 100%;
   background-color: var(--color-bg-secondary);
   padding: var(--indent-vertical) 0;
   display: flex;
@@ -14,7 +15,7 @@ header {
 }
 
 .logoTitle {
-  font-size: 18px;
+  font-size: var(--font-md);
   font-weight: bold;
   color: var(--color-bg-primary);
   text-transform: uppercase;
@@ -32,5 +33,5 @@ header {
 
 h3 {
   margin: 0;
-  font-size: 18px;
+  font-size: var(--font-md);
 }

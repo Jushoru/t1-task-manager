@@ -9,13 +9,15 @@
     flex: 1;
     background-color: var(--color-bg-secondary);
     border-radius: 10px;
-    padding: 0.8rem calc(var(--indent-vertical) / 2);
+    padding: calc(var(--indent-vertical) / 2);
     display: flex;
     flex-direction: column;
+    max-width: 700px;
+    min-width: 200px;
+    min-height: 150px;
 }
 
 .TaskColumn h3 {
-    min-width: 200px;
     margin-bottom: 0.7rem;
     color: var(--color-bg-primary);
     padding-left: var(--indent-vertical)
@@ -27,4 +29,7 @@
     flex-direction: column;
     gap: 0.5rem;
     overflow-y: auto;
+    margin-bottom: calc(var(--indent-vertical)/3);
 }
+
+
