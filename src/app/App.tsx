@@ -2,8 +2,6 @@ import './App.css'
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import {TasksPage} from "../pages/tasks/TasksPage.tsx";
 
-
-// commit: change router method from Routes to createBrowserRouter
 const router = createBrowserRouter([
     {
         path: '/',

@@ -10,13 +10,13 @@ interface TaskItemProps {
 export const TaskItem: React.FC<TaskItemProps> = ({task}) => {
     const navigate = useNavigate();
 
-    const viewImage = (task: TaskUi) => {
+    const viewTask = (task: TaskUi) => {
         const id = task.id;
         navigate('/task/' + id);
     };
 
     return (
-        <div className="taskItemWrapper" onClick={() => viewImage(task)}>
+        <div className="taskItemWrapper" onClick={() => viewTask(task)}>
             <div>
                 <h3>{task.title}</h3>
                 {task.description && <p className="taskDescription">{task.description}</p>}

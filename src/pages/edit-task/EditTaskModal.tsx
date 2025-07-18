@@ -3,6 +3,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { AllTasks } from "../../entities/task/TaskData.ts";
 import type {TaskUi} from "../../entities/task/TaskTypes.ts";
 import {ModalDialog} from "../../widgets/ModalDialog.tsx";
+import {EditTask} from "../../features/edit-task/EditTask.tsx"
 
 
 const Modal = () => {
@@ -30,8 +31,7 @@ const Modal = () => {
         <>
             {taskData && (
                 <ModalDialog open={open} handleOnClose={closeModal} title={"задача"}>
-                    <p>{taskData.title}</p>
-                    <button onClick={closeModal}>Close</button>
+                    <EditTask editTask={taskData} onCancel={closeModal}/>
                 </ModalDialog>
             )}
         </>

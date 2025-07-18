@@ -1,16 +1,14 @@
 import { TaskList } from '../../widgets/task-list/TaskList';
 import type { TaskUi } from '../../entities/task/TaskTypes';
-import './TasksPage.css'
-import {CreateTaskForm} from "../../features/create-task/CreateTaskForm.tsx";
+import {CreateTask} from "../../features/create-task/CreateTask.tsx";
 import type {StatusType} from "../../entities/task/TaskTypes";
 import {useState} from "react";
 import {AllTasks} from "../../entities/task/TaskData.ts";
 import EditTaskModal from "../edit-task/EditTaskModal.tsx";
 import {ModalDialog} from "../../widgets/ModalDialog.tsx";
 
-
 // Временный массив задач
-const mockTasks: TaskUi[] = AllTasks;
+const allTasks: TaskUi[] = AllTasks;
 
 export const TasksPage: React.FC = () => {
     const [modalActive, setActive] = useState(false);
@@ -25,16 +23,12 @@ export const TasksPage: React.FC = () => {
         setActive(false);
     }
 
-    const createNewTask = (data: TaskUi) => {
-        mockTasks.push(data)
-    }
     return (
         <>
-            <TaskList tasks={mockTasks} openCreateTask={openCreateTaskModal}/>
+            <TaskList tasks={allTasks} openCreateTask={openCreateTaskModal}/>
             <ModalDialog open={modalActive} handleOnClose={closeModal} title={"Создание задачи"}>
-                <CreateTaskForm
+                <CreateTask
                     taskStatus={currentTaskStatus}
-                    newTask={createNewTask}
                     onCancel={() => setActive(false)}
                 />
             </ModalDialog>

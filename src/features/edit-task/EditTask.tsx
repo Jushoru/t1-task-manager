@@ -9,39 +9,45 @@ import {
     Button,
 } from '@mui/material';
 import { validateTask } from '../../entities/task/TaskValidate';
+import {AllTasks} from "../../entities/task/TaskData.ts";
 
 export interface CreateTaskFormProps {
-    taskStatus: StatusType;
-    newTask: (task: TaskUi) => void;
+    editTask: TaskUi;
     onCancel: () => void;
 }
 
-export const CreateTaskForm = ({ taskStatus, newTask, onCancel }: CreateTaskFormProps) => {
-    const [title, setTitle] = useState('');
-    const [description, setDescription] = useState('');
-    const [category, setCategory] = useState('Test');
-    const [priority, setPriority] = useState('Low');
+export const EditTask = ({ editTask, onCancel }: CreateTaskFormProps) => {
+    const [title, setTitle] = useState(editTask.title);
+    const [description, setDescription] = useState(editTask.description);
+    const [category, setCategory] = useState(editTask.category);
+    const [status, setStatus] = useState(editTask.status);
+    const [priority, setPriority] = useState(editTask.priority);
 
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
 
-        const task: TaskUi = {
-            id: Date.now().toString(),
+        const updatedTask: TaskUi = {
+            id: editTask.id,
             title,
             description,
             category: category as CategoryType,
-            status: taskStatus,
+            status: status as StatusType,
             priority: priority as PriorityType,
         };
 
-        const errors = validateTask(task);
+        const errors = validateTask(updatedTask);
 
         if (errors.length > 0) {
             alert(errors.join('\n'));
             return;
         }
 
-        newTask(task);
+        const updatedTasks = AllTasks.map(task =>
+            task.id === editTask.id ? updatedTask : task
+        );
+
+        Object.assign(AllTasks, updatedTasks);
+
         onCancel();
     };
 
@@ -53,6 +59,7 @@ export const CreateTaskForm = ({ taskStatus, newTask, onCancel }: CreateTaskForm
                 value={title}
                 onChange={(e) => setTitle(e.target.value)}
                 margin="dense"
+                size="small"
             />
             <TextField
                 fullWidth
@@ -60,6 +67,7 @@ export const CreateTaskForm = ({ taskStatus, newTask, onCancel }: CreateTaskForm
                 value={description}
                 onChange={(e) => setDescription(e.target.value)}
                 margin="normal"
+                size="small"
             />
             <FormControl fullWidth margin="normal">
                 <InputLabel id="category-select-label">Категория</InputLabel>
@@ -67,6 +75,7 @@ export const CreateTaskForm = ({ taskStatus, newTask, onCancel }: CreateTaskForm
                     labelId="category-select-label"
                     value={category}
                     label="Категория"
+                    size="small"
                     onChange={(e) => setCategory(e.target.value)}
                 >
                     <MenuItem value="Bug">Bug</MenuItem>
@@ -80,8 +89,23 @@ export const CreateTaskForm = ({ taskStatus, newTask, onCancel }: CreateTaskForm
                 <InputLabel id="priority-select-label">Приоритет</InputLabel>
                 <Select
                     labelId="priority-select-label"
+                    value={status}
+                    label="Статус"
+                    size="small"
+                    onChange={(e) => setStatus(e.target.value)}
+                >
+                    <MenuItem value="ToDo">ToDo</MenuItem>
+                    <MenuItem value="InProgress">InProgress</MenuItem>
+                    <MenuItem value="Done">Done</MenuItem>
+                </Select>
+            </FormControl>
+            <FormControl fullWidth margin="normal">
+                <InputLabel id="priority-select-label">Приоритет</InputLabel>
+                <Select
+                    labelId="priority-select-label"
                     value={priority}
                     label="Приоритет"
+                    size="small"
                     onChange={(e) => setPriority(e.target.value)}
                 >
                     <MenuItem value="Low">Low</MenuItem>
@@ -99,7 +123,7 @@ export const CreateTaskForm = ({ taskStatus, newTask, onCancel }: CreateTaskForm
                 <Button sx={{backgroundColor: 'var(--color-button)'}}
                         type="submit" variant="contained" size="small"
                 >
-                    Создать задачу
+                    Сохранить изменения
                 </Button>
             </div>
         </form>
