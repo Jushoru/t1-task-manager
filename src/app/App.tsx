@@ -1,23 +1,34 @@
 import './App.css'
-import { Routes, Route, Link } from "react-router-dom";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import {TasksPage} from "../pages/tasks/TasksPage.tsx";
-import {EditTaskPage} from "../pages/edit-task/ui/EditTaskPage.tsx";
+
+
+// commit: change router method from Routes to createBrowserRouter
+const router = createBrowserRouter([
+    {
+        path: '/',
+        element: <TasksPage />,
+        children: [
+            {
+                path: 'task/:id',
+                element: null,
+            },
+        ],
+    },
+]);
 
 function App() {
 
   return (
     <>
         <header>
-            <Link to="/" className="logoWrapper">
+            <div className="logoWrapper">
                 <img src="/logo.svg" alt="logo" width="35"/>
                 <span className="logoTitle">Тасочный менеджеритель</span>
-            </Link>
+            </div>
         </header>
         <div className="mainWrapper">
-            <Routes>
-                <Route path="/" element={<TasksPage/>} />
-                <Route path="/task" element={<EditTaskPage/>} />
-            </Routes>
+            <RouterProvider router={router}/>
         </div>
     </>
   )

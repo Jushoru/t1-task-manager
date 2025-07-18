@@ -3,7 +3,7 @@ export type CategoryType = 'Bug' | 'Feature' | 'Documentation' | 'Refactor' | 'T
 export type PriorityType = 'Low' | 'Medium' | 'High';
 
 export interface TaskUi {
-    id: number;
+    id: string;
     title: string;
     description?: string;
     category: CategoryType;

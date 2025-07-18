@@ -26,7 +26,7 @@ export const CreateTaskForm = ({ taskStatus, newTask, onCancel }: CreateTaskForm
         e.preventDefault();
 
         const task: TaskUi = {
-            id: Date.now(),
+            id: Date.now().toString(),
             title,
             description,
             category: category as CategoryType,
