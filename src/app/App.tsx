@@ -13,7 +13,9 @@ const router = createBrowserRouter([
             },
         ],
     },
-]);
+    ],
+    { basename: import.meta.env.BASE_URL }
+);
 
 function App() {
 
@@ -21,7 +23,7 @@ function App() {
     <>
         <header>
             <div className="logoWrapper">
-                <img src="/logo.svg" alt="logo" width="35"/>
+                <img src={`${import.meta.env.BASE_URL}/logo.svg`} alt="logo" width="35"/>
                 <span className="logoTitle">Тасочный менеджеритель</span>
             </div>
         </header>
