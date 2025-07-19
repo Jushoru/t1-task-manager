@@ -49,7 +49,12 @@ export const CreateTask = ({ taskStatus, onCancel }: CreateTaskFormProps) => {
         <form onSubmit={handleSubmit}>
             <TextField
                 fullWidth
-                label="Заголовок"
+                label={
+                    <span>
+                        Заголовок
+                        <span style={{ color: 'var(--color-2)'}}>*</span>
+                    </span>
+                }
                 value={title}
                 onChange={(e) => setTitle(e.target.value)}
                 margin="dense"
@@ -62,9 +67,14 @@ export const CreateTask = ({ taskStatus, onCancel }: CreateTaskFormProps) => {
                 onChange={(e) => setDescription(e.target.value)}
                 margin="normal"
                 size="small"
+                multiline
+                maxRows={4}
             />
             <FormControl fullWidth margin="normal">
-                <InputLabel id="category-select-label">Категория</InputLabel>
+                <InputLabel id="category-select-label">
+                    Категория
+                    <span style={{ color: 'var(--color-2)'}}>*</span>
+                </InputLabel>
                 <Select
                     labelId="category-select-label"
                     value={category}
@@ -80,7 +90,10 @@ export const CreateTask = ({ taskStatus, onCancel }: CreateTaskFormProps) => {
                 </Select>
             </FormControl>
             <FormControl fullWidth margin="normal">
-                <InputLabel id="priority-select-label">Приоритет</InputLabel>
+                <InputLabel id="priority-select-label">
+                    Приоритет
+                    <span style={{ color: 'var(--color-2)'}}>*</span>
+                </InputLabel>
                 <Select
                     labelId="priority-select-label"
                     value={priority}

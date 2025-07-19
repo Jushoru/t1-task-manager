@@ -55,11 +55,18 @@ export const EditTask = ({ editTask, onCancel }: CreateTaskFormProps) => {
         <form onSubmit={handleSubmit}>
             <TextField
                 fullWidth
-                label="Заголовок"
+                label={
+                    <span>
+                        Заголовок
+                        <span style={{ color: 'var(--color-2)'}}>*</span>
+                    </span>
+                }
                 value={title}
                 onChange={(e) => setTitle(e.target.value)}
                 margin="dense"
                 size="small"
+                multiline
+                maxRows={4}
             />
             <TextField
                 fullWidth
@@ -70,7 +77,10 @@ export const EditTask = ({ editTask, onCancel }: CreateTaskFormProps) => {
                 size="small"
             />
             <FormControl fullWidth margin="normal">
-                <InputLabel id="category-select-label">Категория</InputLabel>
+                <InputLabel id="category-select-label" >
+                    Категория
+                    <span style={{ color: 'var(--color-2)'}}>*</span>
+                </InputLabel>
                 <Select
                     labelId="category-select-label"
                     value={category}
@@ -86,7 +96,11 @@ export const EditTask = ({ editTask, onCancel }: CreateTaskFormProps) => {
                 </Select>
             </FormControl>
             <FormControl fullWidth margin="normal">
-                <InputLabel id="priority-select-label">Приоритет</InputLabel>
+                <InputLabel id="priority-select-label">
+                    Статус
+                    <span style={{ color: 'var(--color-2)'}}>*</span>
+
+                </InputLabel>
                 <Select
                     labelId="priority-select-label"
                     value={status}
@@ -100,7 +114,11 @@ export const EditTask = ({ editTask, onCancel }: CreateTaskFormProps) => {
                 </Select>
             </FormControl>
             <FormControl fullWidth margin="normal">
-                <InputLabel id="priority-select-label">Приоритет</InputLabel>
+                <InputLabel id="priority-select-label">
+                    Приоритет
+                    <span style={{ color: 'var(--color-2)'}}>*</span>
+
+                </InputLabel>
                 <Select
                     labelId="priority-select-label"
                     value={priority}
