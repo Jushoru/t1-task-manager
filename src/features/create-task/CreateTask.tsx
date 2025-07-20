@@ -9,7 +9,7 @@ import {
     Button,
 } from '@mui/material';
 import { validateTask } from '../../entities/task/TaskValidate';
-import { AllTasks } from "../../entities/task/TaskData.ts";
+import { useTaskStore } from "../../entities/task/TaskStore.ts";
 
 export interface CreateTaskFormProps {
     taskStatus: StatusType;
@@ -17,10 +17,13 @@ export interface CreateTaskFormProps {
 }
 
 export const CreateTask = ({ taskStatus, onCancel }: CreateTaskFormProps) => {
+    const { createTask } = useTaskStore()
+
     const [title, setTitle] = useState('');
     const [description, setDescription] = useState('');
     const [category, setCategory] = useState('Test');
     const [priority, setPriority] = useState('Low');
+
 
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
@@ -41,7 +44,7 @@ export const CreateTask = ({ taskStatus, onCancel }: CreateTaskFormProps) => {
             return;
         }
 
-        AllTasks.push(task);
+        createTask(task);
         onCancel();
     };
 

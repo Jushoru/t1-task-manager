@@ -4,7 +4,7 @@ import { AllTasks } from './TaskData';
 
 interface TaskState {
     tasks: TaskUi[];
-    addTask: (task: TaskUi) => void;
+    createTask: (task: TaskUi) => void;
     deleteTask: (id: string) => void;
     updateTask: (id: string, updatedFields: Partial<TaskUi>) => void;
     getAllTasks: () => TaskUi[];
@@ -13,7 +13,7 @@ interface TaskState {
 
 export const useTaskStore = create<TaskState>((set, get) => ({
     tasks: AllTasks,
-    addTask: (task) => set({ tasks: [...get().tasks, task] }),
+    createTask: (task) => set({ tasks: [...get().tasks, task] }),
     deleteTask: (id) => set({ tasks: get().tasks.filter((task) => task.id !== id) }),
     updateTask: (id, updatedFields) =>
         set({
