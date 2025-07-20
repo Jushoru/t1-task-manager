@@ -1,18 +1,21 @@
-import type {StatusType, TaskUi} from "../../entities/task/TaskTypes.ts";
+import type {StatusType} from "../../entities/task/TaskTypes.ts";
 import { TaskItem } from "../task-item/TaskItem.tsx";
 import {Button} from "@mui/material";
 import './TaskList.css';
 import AddIcon from '@mui/icons-material/Add';
+import {useTaskStore} from "../../entities/task/TaskStore.ts";
 
 interface TaskListProps {
-    tasks: TaskUi[];
     openCreateTask: (status: StatusType) => void;
 }
 
-export const TaskList: React.FC<TaskListProps> = ({ tasks, openCreateTask}) => {
-    const todoTasks = tasks.filter(task => task.status === 'ToDo');
-    const inProgressTasks = tasks.filter(task => task.status === 'InProgress');
-    const doneTasks = tasks.filter(task => task.status === 'Done');
+export const TaskList: React.FC<TaskListProps> = ({ openCreateTask }) => {
+    const { getAllTasks } = useTaskStore();
+    const allTasks = getAllTasks();
+
+    const todoTasks = allTasks.filter(task => task.status === 'ToDo');
+    const inProgressTasks = allTasks.filter(task => task.status === 'InProgress');
+    const doneTasks = allTasks.filter(task => task.status === 'Done');
 
     const createTask = (status: StatusType) => {
         openCreateTask(status)

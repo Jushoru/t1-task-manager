@@ -9,7 +9,7 @@ import {
     Button,
 } from '@mui/material';
 import { validateTask } from '../../entities/task/TaskValidate';
-import {AllTasks} from "../../entities/task/TaskData.ts";
+import { useTaskStore } from "../../entities/task/TaskStore.ts";
 
 export interface CreateTaskFormProps {
     editTask: TaskUi;
@@ -17,6 +17,8 @@ export interface CreateTaskFormProps {
 }
 
 export const EditTask = ({ editTask, onCancel }: CreateTaskFormProps) => {
+    const { updateTask } = useTaskStore();
+
     const [title, setTitle] = useState(editTask.title);
     const [description, setDescription] = useState(editTask.description);
     const [category, setCategory] = useState(editTask.category);
@@ -42,11 +44,7 @@ export const EditTask = ({ editTask, onCancel }: CreateTaskFormProps) => {
             return;
         }
 
-        const updatedTasks = AllTasks.map(task =>
-            task.id === editTask.id ? updatedTask : task
-        );
-
-        Object.assign(AllTasks, updatedTasks);
+        updateTask(editTask.id, updatedTask);
 
         onCancel();
     };
