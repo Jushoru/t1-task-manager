@@ -1,6 +1,5 @@
 import { create } from 'zustand';
 import type { TaskUi } from './TaskTypes';
-import { AllTasks } from './TaskData';
 
 interface TaskState {
     tasks: TaskUi[];
@@ -11,18 +10,42 @@ interface TaskState {
     getTaskById: (id: string) => TaskUi | undefined;
 }
 
-// TODO: добавить сохранение задач в localStorage
+const loadTasks = (): TaskUi[] => {
+    const saved = localStorage.getItem('tasks');
+    return saved ? JSON.parse(saved) : [];
+};
+
+const saveTasks = (tasks: TaskUi[]) => {
+    localStorage.setItem('tasks', JSON.stringify(tasks));
+};
 
 export const useTaskStore = create<TaskState>((set, get) => ({
-    tasks: AllTasks,
-    createTask: (task) => set({ tasks: [...get().tasks, task] }),
-    deleteTask: (id) => set({ tasks: get().tasks.filter((task) => task.id !== id) }),
-    updateTask: (id, updatedFields) =>
-        set({
-            tasks: get().tasks.map((task) =>
-                task.id === id ? { ...task, ...updatedFields } : task
-            ),
+    tasks: loadTasks(),
+
+    createTask: (task) =>
+        set((state) => {
+            const newTasks = [...state.tasks, task];
+            saveTasks(newTasks);
+            return { tasks: newTasks };
         }),
+
+    deleteTask: (id) =>
+        set((state) => {
+            const newTasks = state.tasks.filter((task) => task.id !== id);
+            saveTasks(newTasks);
+            return { tasks: newTasks };
+        }),
+
+    updateTask: (id, updatedFields) =>
+        set((state) => {
+            const newTasks = state.tasks.map((task) =>
+                task.id === id ? { ...task, ...updatedFields } : task
+            );
+            saveTasks(newTasks);
+            return { tasks: newTasks };
+        }),
+
     getAllTasks: () => get().tasks,
+
     getTaskById: (id) => get().tasks.find((task) => task.id === id),
 }));
