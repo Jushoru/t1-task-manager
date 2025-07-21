@@ -76,8 +76,7 @@ export const CreateTask = ({ taskStatus, onCancel }: CreateTaskFormProps) => {
                 onChange={(e) => setDescription(e.target.value)}
                 margin="normal"
                 size="small"
-                multiline
-                maxRows={4}
+
             />
             <FormControl fullWidth margin="normal">
                 <InputLabel id="category-select-label">

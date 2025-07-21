@@ -1,3 +1,4 @@
+import './EditTask.css'
 import type { TaskUi, StatusType, CategoryType, PriorityType} from "../../entities/task/TaskTypes";
 import { useState } from 'react';
 import {
@@ -7,22 +8,22 @@ import {
     MenuItem,
     FormControl,
     Button,
+    IconButton,
 } from '@mui/material';
 import { validateTask } from '../../entities/task/TaskValidate';
 import { useTaskStore } from "../../entities/task/TaskStore.ts";
 import { DatePicker, LocalizationProvider} from "@mui/x-date-pickers";
 import {AdapterDayjs} from "@mui/x-date-pickers/AdapterDayjs";
 import dayjs, {Dayjs} from "dayjs";
+import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 
 export interface CreateTaskFormProps {
     editTask: TaskUi;
     onCancel: () => void;
 }
 
-// TODO: добавить кнопку удаления задачи
-
 export const EditTask = ({ editTask, onCancel }: CreateTaskFormProps) => {
-    const { updateTask } = useTaskStore();
+    const { updateTask, deleteTask } = useTaskStore();
 
     const [title, setTitle] = useState(editTask.title);
     const [description, setDescription] = useState(editTask.description);
@@ -55,6 +56,15 @@ export const EditTask = ({ editTask, onCancel }: CreateTaskFormProps) => {
         onCancel();
     };
 
+    const handleDelete = (id: string) => {
+        const isConfirmed = window.confirm('Вы уверены, что хотите удалить эту задачу?');
+
+        if (isConfirmed) {
+            deleteTask(id);
+            onCancel();
+        }
+    }
+
     return (
         <form onSubmit={handleSubmit}>
             <TextField
@@ -79,6 +89,8 @@ export const EditTask = ({ editTask, onCancel }: CreateTaskFormProps) => {
                 onChange={(e) => setDescription(e.target.value)}
                 margin="normal"
                 size="small"
+                multiline
+                maxRows={4}
             />
             <FormControl fullWidth margin="normal">
                 <InputLabel id="category-select-label" >
@@ -144,13 +156,21 @@ export const EditTask = ({ editTask, onCancel }: CreateTaskFormProps) => {
                     slotProps={{ textField: { size: 'small', fullWidth: true, margin: 'normal' } }}
                 />
             </LocalizationProvider>
-            <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: '16px', marginBottom: '16px' }}>
-                <Button
-                    sx={{border: 'solid 1px var(--color-button)', color: 'var(--color-button)'}}
-                    variant="outlined" onClick={onCancel} size="small"
-                >
-                    Отмена
-                </Button>
+            <div className="buttonsWrapper">
+                <div>
+                    <Button
+                        sx={{border: 'solid 1px var(--color-button)', color: 'var(--color-button)'}}
+                        variant="outlined" onClick={onCancel} size="small"
+                    >
+                        Отмена
+                    </Button>
+                    <IconButton
+                        sx={{border: 'solid 1px var(--color-2)', color: 'var(--color-2)', marginLeft: '1rem', borderRadius: '4px'}}
+                        size="small"
+                        children={<DeleteForeverIcon/>}
+                        onClick={() => handleDelete(editTask.id)}
+                    />
+                </div>
                 <Button sx={{backgroundColor: 'var(--color-button)'}}
                         type="submit" variant="contained" size="small"
                 >

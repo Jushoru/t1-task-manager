@@ -1,9 +1,9 @@
-import type {StatusType} from "../../entities/task/TaskTypes.ts";
+import type {StatusType} from "@/entities/task/TaskTypes.ts";
 import { TaskItem } from "../task-item/TaskItem.tsx";
 import {Button} from "@mui/material";
 import './TaskList.css';
 import AddIcon from '@mui/icons-material/Add';
-import {useTaskStore} from "../../entities/task/TaskStore.ts";
+import {useTaskStore} from "@/entities/task/TaskStore.ts";
 import {useNavigate} from "react-router-dom";
 
 export const TaskList = () => {
