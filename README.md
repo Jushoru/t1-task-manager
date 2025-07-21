@@ -4,7 +4,9 @@
 https://jushoru.github.io/t1-task-manager/
 
 Простой веб-менеджер задач, реализованный на React + TypeScript  с использованием React Router v6  и Material UI.
-Деплой пройкета был сеплой на github pages с коректной динамической маршрутизацией при помощи решения: https://github.com/rafgraph/spa-github-pages
+Все изменения сохраняются в ```local storage```.
+Деплой пройкета был сеплой на github pages с коректной динамической маршрутизацией при помощи решения:
+https://github.com/rafgraph/spa-github-pages
 
 ### Технологии
 - React  (TypeScript)
@@ -13,4 +15,6 @@ https://jushoru.github.io/t1-task-manager/
 - Material UI 
 - Vite  (сборщик)
 - FSD (Feature-Sliced Design)  — архитектура
+- DayJS
+- NanoId
 
