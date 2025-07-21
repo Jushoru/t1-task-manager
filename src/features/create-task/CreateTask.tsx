@@ -10,6 +10,11 @@ import {
 } from '@mui/material';
 import { validateTask } from '../../entities/task/TaskValidate';
 import { useTaskStore } from "../../entities/task/TaskStore.ts";
+import {nanoid} from "nanoid";
+import dayjs, {Dayjs} from 'dayjs';
+import {AdapterDayjs} from "@mui/x-date-pickers/AdapterDayjs";
+import {DatePicker, LocalizationProvider} from "@mui/x-date-pickers";
+
 
 export interface CreateTaskFormProps {
     taskStatus: StatusType;
@@ -23,13 +28,14 @@ export const CreateTask = ({ taskStatus, onCancel }: CreateTaskFormProps) => {
     const [description, setDescription] = useState('');
     const [category, setCategory] = useState('Test');
     const [priority, setPriority] = useState('Low');
-
+    const [date, setDate] = useState<Dayjs>(dayjs());
 
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
 
         const task: TaskUi = {
-            id: Date.now().toString(),
+            id: nanoid(),
+            date: date.toISOString(),
             title,
             description,
             category: category as CategoryType,
@@ -109,6 +115,19 @@ export const CreateTask = ({ taskStatus, onCancel }: CreateTaskFormProps) => {
                     <MenuItem value="High">High</MenuItem>
                 </Select>
             </FormControl>
+            <LocalizationProvider dateAdapter={AdapterDayjs}>
+                <DatePicker
+                    label="Выберите дату создания"
+                    value={date}
+                    format="DD.MM.YYYY"
+                    onChange={(newDate: Dayjs | null) => {
+                        if (newDate) {
+                            setDate(newDate);
+                        }
+                    }}
+                    slotProps={{ textField: { size: 'small', fullWidth: true, margin: 'normal' } }}
+                />
+            </LocalizationProvider>
             <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: '16px', marginBottom: '16px' }}>
                 <Button
                     sx={{border: 'solid 1px var(--color-button)', color: 'var(--color-button)'}}

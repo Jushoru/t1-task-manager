@@ -4,6 +4,7 @@ export type PriorityType = 'Low' | 'Medium' | 'High';
 
 export interface TaskUi {
     id: string;
+    date: string;
     title: string;
     description?: string;
     category: CategoryType;

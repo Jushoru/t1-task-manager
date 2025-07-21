@@ -31,7 +31,7 @@ export const EditTaskModal = () => {
     return (
         <>
             {taskData && (
-                <ModalDialog open={open} handleOnClose={closeModal} title={"задача"}>
+                <ModalDialog open={open} handleOnClose={closeModal} title={"Задача"}>
                     <EditTask editTask={taskData} onCancel={closeModal}/>
                 </ModalDialog>
             )}

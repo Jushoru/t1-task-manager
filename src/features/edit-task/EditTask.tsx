@@ -10,6 +10,9 @@ import {
 } from '@mui/material';
 import { validateTask } from '../../entities/task/TaskValidate';
 import { useTaskStore } from "../../entities/task/TaskStore.ts";
+import { DatePicker, LocalizationProvider} from "@mui/x-date-pickers";
+import {AdapterDayjs} from "@mui/x-date-pickers/AdapterDayjs";
+import dayjs, {Dayjs} from "dayjs";
 
 export interface CreateTaskFormProps {
     editTask: TaskUi;
@@ -28,12 +31,14 @@ export const EditTask = ({ editTask, onCancel }: CreateTaskFormProps) => {
     const [category, setCategory] = useState(editTask.category);
     const [status, setStatus] = useState(editTask.status);
     const [priority, setPriority] = useState(editTask.priority);
+    const [date, setDate] = useState<Dayjs | null>(editTask.date ? dayjs(editTask.date) : null);
 
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
 
         const updatedTask: TaskUi = {
             id: editTask.id,
+            date: date?.toISOString() || '',
             title,
             description,
             category: category as CategoryType,
@@ -132,6 +137,15 @@ export const EditTask = ({ editTask, onCancel }: CreateTaskFormProps) => {
                     <MenuItem value="High">High</MenuItem>
                 </Select>
             </FormControl>
+            <LocalizationProvider dateAdapter={AdapterDayjs}>
+                <DatePicker
+                    label="Выберите дату создания"
+                    value={date}
+                    format="DD.MM.YYYY"
+                    onChange={(newDate) => setDate(newDate)}
+                    slotProps={{ textField: { size: 'small', fullWidth: true, margin: 'normal' } }}
+                />
+            </LocalizationProvider>
             <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: '16px', marginBottom: '16px' }}>
                 <Button
                     sx={{border: 'solid 1px var(--color-button)', color: 'var(--color-button)'}}
