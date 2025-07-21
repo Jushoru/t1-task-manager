@@ -4,21 +4,19 @@ import {Button} from "@mui/material";
 import './TaskList.css';
 import AddIcon from '@mui/icons-material/Add';
 import {useTaskStore} from "../../entities/task/TaskStore.ts";
+import {useNavigate} from "react-router-dom";
 
-interface TaskListProps {
-    openCreateTask: (status: StatusType) => void;
-}
-
-export const TaskList: React.FC<TaskListProps> = ({ openCreateTask }) => {
+export const TaskList = () => {
     const { getAllTasks } = useTaskStore();
     const allTasks = getAllTasks();
+    const navigate = useNavigate();
 
     const todoTasks = allTasks.filter(task => task.status === 'ToDo');
     const inProgressTasks = allTasks.filter(task => task.status === 'InProgress');
     const doneTasks = allTasks.filter(task => task.status === 'Done');
 
     const createTask = (status: StatusType) => {
-        openCreateTask(status)
+        navigate('task/new/' + status);
     }
 
     return (

@@ -6,7 +6,7 @@ import {EditTask} from "../../features/edit-task/EditTask.tsx"
 import {useTaskStore} from "../../entities/task/TaskStore.ts";
 
 
-const Modal = () => {
+export const EditTaskModal = () => {
     const { id: taskId } = useParams();
     const navigate = useNavigate();
 
@@ -22,7 +22,7 @@ const Modal = () => {
         } else {
             setOpen(false);
         }
-    }, [taskId]);
+    }, [taskId, getTaskById]);
 
     const closeModal = () => {
         navigate('/');
@@ -38,5 +38,3 @@ const Modal = () => {
         </>
     );
 };
-
-export default Modal;

@@ -11,6 +11,10 @@ const router = createBrowserRouter([
                 path: 'task/:id',
                 element: null,
             },
+            {
+                path: 'task/new/:status',
+                element: null,
+            }
         ],
     },
     ],

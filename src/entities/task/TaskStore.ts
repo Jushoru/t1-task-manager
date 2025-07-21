@@ -11,6 +11,8 @@ interface TaskState {
     getTaskById: (id: string) => TaskUi | undefined;
 }
 
+// TODO: добавить сохранение задач в localStorage
+
 export const useTaskStore = create<TaskState>((set, get) => ({
     tasks: AllTasks,
     createTask: (task) => set({ tasks: [...get().tasks, task] }),
