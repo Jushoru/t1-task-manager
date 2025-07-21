@@ -20,8 +20,6 @@ export interface CreateTaskFormProps {
 }
 
 // TODO: добавить кнопку удаления задачи
-// TODO: добавить дату создания задачи (просто редачить id)
-// TODO: походу придётся менять id на uid, чтобы можно былло редачить дату создания задачи
 
 export const EditTask = ({ editTask, onCancel }: CreateTaskFormProps) => {
     const { updateTask } = useTaskStore();
