@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import type {TaskUi} from "../../entities/task/TaskTypes.ts";
+import type {TaskUi} from "@/entities/task/TaskTypes.ts";
 import {ModalDialog} from "../../widgets/ModalDialog.tsx";
 import {EditTask} from "../../features/edit-task/EditTask.tsx"
-import {useTaskStore} from "../../entities/task/TaskStore.ts";
+import {useTaskStore} from "@/entities/task/TaskStore.ts";
 
 
 export const EditTaskModal = () => {

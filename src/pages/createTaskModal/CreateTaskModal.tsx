@@ -1,7 +1,7 @@
-import {ModalDialog} from "../../widgets/ModalDialog.tsx";
-import {CreateTask} from "../../features/create-task/CreateTask.tsx";
+import {ModalDialog} from "@/widgets/ModalDialog.tsx";
+import {CreateTask} from "@/features/create-task/CreateTask.tsx";
 import {useState, useEffect} from "react";
-import type {StatusType} from "../../entities/task/TaskTypes.ts";
+import type {StatusType} from "@/entities/task/TaskTypes.ts";
 import {useNavigate, useParams} from "react-router-dom";
 
 const isStatusType = (value: string): value is StatusType => {
